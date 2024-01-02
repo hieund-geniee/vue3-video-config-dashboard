@@ -20,7 +20,9 @@ const routes: Array<RouteRecordRaw> = [
 ];
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHashHistory(
+    process.env.BASE_URL ?? "/Vue3-Form-Validation/dist/"
+  ),
   routes,
 });
 
