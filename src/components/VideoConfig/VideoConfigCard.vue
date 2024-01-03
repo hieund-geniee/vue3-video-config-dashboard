@@ -132,6 +132,9 @@
                         >
                             Copy Tag
                         </button>
+                        <div class="alert alert-info" role="alert" v-show="isAlertShow">
+                            <span class="text-white">Copied</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -140,7 +143,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from "vue";
+import {defineComponent, ref} from "vue";
 import useVuelidate from "@vuelidate/core";
 import {required, minLength, helpers, url} from "@vuelidate/validators";
 
@@ -154,12 +157,12 @@ export default defineComponent({
         BaseSelect,
     },
     setup() {
-        let isAlertShow = false;
+        let isAlertShow = ref(false);
         const copyToClipBoard = (textToCopy: string) => {
-            isAlertShow = !isAlertShow
+            isAlertShow.value = !isAlertShow.value
             textToCopy = decodeHtml(textToCopy)
             navigator.clipboard.writeText(textToCopy);
-            setTimeout(() => isAlertShow = false, 1300)
+            setTimeout(() => isAlertShow.value = false, 1300)
         }
 
         const decodeHtml = (html: string) => {
